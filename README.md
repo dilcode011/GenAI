@@ -37,8 +37,8 @@ docs/          → Guides
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/llm-langchain-playground.git
-cd llm-langchain-playground
+git clone https://github.com/yourusername/GenAI.git
+cd GenAI
 ```
 
 ### 2. Create virtual environment
