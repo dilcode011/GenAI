@@ -13,11 +13,11 @@ style_input = st.selectbox( "Select Explanation Style", ["Beginner-Friendly", "T
 
 length_input = st.selectbox( "Select Explanation Length", ["Short (1-2 paragraphs)", "Medium (3-5 paragraphs)", "Long (detailed explanation)"] )
 
-
+# Load the prompt template from the JSON file created in prompt_gentr.py
 template = load_prompt('template.json')
 
 
-
+# When the "Summarize" button is clicked, the code creates a chain by combining the loaded prompt template with the language model. It then invokes the chain with the user inputs (paper name, explanation style, and explanation length) to generate a summary of the research paper. The result is displayed on the Streamlit app using st.write().
 if st.button('Summarize'):
     chain = template | model
     result = chain.invoke({
