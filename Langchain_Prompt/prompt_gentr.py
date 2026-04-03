@@ -1,7 +1,8 @@
 # This class is used to create dynamic prompts with placeholders. It allows you to define a template with variables that can be filled in at runtime, making it easier to generate customized prompts for different use cases.
 from langchain_core.prompts import PromptTemplate
 
-# template =PromptTemplate is used to create a prompt template with placeholders for dynamic content. The template string contains variables enclosed in curly braces (e.g., {paper_input}, {style_input}, {length_input}) that can be filled in with specific values when the prompt is invoked. The input_variables parameter specifies the list of variables that will be used in the template, and validate_template=True ensures that the template is checked for correctness when it is created.
+# template =PromptTemplate is used to create a prompt template with placeholders for dynamic content.
+#The template string contains variables enclosed in curly braces (e.g., {paper_input}, {style_input}, {length_input}) that can be filled in with specific values when the prompt is invoked. The input_variables parameter specifies the list of variables that will be used in the template, and validate_template=True ensures that the template is checked for correctness when it is created.
 template = PromptTemplate(
     template="""
 Please summarize the research paper titled "{paper_input}" with the following specifications:
