@@ -19,7 +19,7 @@ class review(TypedDict):
     sentiment:Annotated[Literal['pos','neg'],'Return sentiment of the review either negative,positive,neutral']
     pros:Annotated[Optional[list[str]],'Write down all the pros inside a list']
     cons:Annotated[Optional[list[str]],'Write down all the cons inside a list']
-    name:Annotated[Optional[str],'write the name of the reviewe r ']
+    name:Annotated[Optional[str],'write the name of the reviewer']
 structured_model=model.with_structured_output(review)
 
 
