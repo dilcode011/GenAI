@@ -6,6 +6,9 @@ class Student(BaseModel):
     age:Optional[int]=None
 
 new_student={'age':21}
+new_student={'age':'21'}
+
+#Both will return value ,no error
 
 student=Student(**new_student)
 print(student)
