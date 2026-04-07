@@ -1,38 +1,28 @@
-# LangChain Output Parsers Comparison
+# LangChain Output Parsers - Complete Comparison
 
 ## Overview
 
-**Output Parsers** in LangChain help convert the raw (often unstructured) text output from Large Language Models (LLMs) into usable Python data structures.
+**Output Parsers** in LangChain convert the raw output from LLMs (usually text) into structured Python objects.
 
-They are especially useful when working with older models or when you need fine-grained control over formatting instructions in the prompt.
+They are particularly useful with older models or when you need explicit control over output formatting via prompts.
 
-> **Note**: Modern LLMs (like GPT-4o, Claude 3, Grok, Gemini) often support **native structured output** via `.with_structured_output()` or tool calling, which is usually more reliable than legacy output parsers.
-
----
-
-## The Four Main Output Parsers
-
-| Parser                      | Output Type                  | Validation | Schema Definition          | Best For                              | Limitations                          | When to Use |
-|----------------------------|------------------------------|------------|----------------------------|---------------------------------------|--------------------------------------|-------------|
-| **StrOutputParser**        | `str` (plain text)           | None       | Not applicable             | Simple text extraction, chatbots, raw responses | No structure at all                  | You just need clean text |
-| **JsonOutputParser**       | `dict` (Python dictionary)   | None       | In prompt (JSON schema)    | Flexible JSON-like data               | No type validation, can fail on bad JSON | Quick structured data without strict types |
-| **StructuredOutputParser** | `dict` (Python dictionary)   | Basic      | Schema via `ResponseSchema` | Fixed schema with clear instructions  | Less powerful than Pydantic          | When you want a simple schema without Pydantic dependency |
-| **PydanticOutputParser**   | Pydantic Model (typed object)| **Full**   | Pydantic BaseModel         | Production-grade apps, type safety, validation | Requires Pydantic models             | When you need strict typing + validation |
+> **Note**: Modern LLMs (GPT-4o, Claude 3.5, Grok, Gemini 1.5, etc.) support **native structured output** using `.with_structured_output()` or tool calling. This is generally more reliable than legacy output parsers.
 
 ---
 
-### 1. StrOutputParser
+## Comparison Table
 
-- **Simplest parser**.
-- Extracts only the text content from model outputs (handles `AIMessage`, `AIMessageChunk`, etc.).
-- No formatting instructions needed in the prompt.
-- Supports streaming.
+| Parser                          | Output Type                  | Validation       | Schema Definition                  | Streaming Support | Best For                                      | Limitations                              |
+|--------------------------------|------------------------------|------------------|------------------------------------|-------------------|-----------------------------------------------|------------------------------------------|
+| **StrOutputParser**            | `str`                        | None             | Not applicable                     | Yes               | Raw text, chatbots, summarization             | No structure                             |
+| **JsonOutputParser**           | `dict`                       | None             | JSON format in prompt              | Yes (partial)     | Flexible JSON data                            | No type validation, brittle              |
+| **StructuredOutputParser**     | `dict`                       | Basic            | `ResponseSchema`                   | No                | Simple fixed schema without Pydantic          | Less powerful, no type safety            |
+| **PydanticOutputParser**       | Pydantic `BaseModel`         | **Full**         | Pydantic Model                     | No                | Production apps, type safety, validation      | Requires Pydantic                        |
+| **PydanticToolsParser**        | Pydantic `BaseModel`         | **Full**         | Tool calling + Pydantic            | No                | When using tools / function calling           | Only works with tool-enabled models      |
+| **XmlOutputParser**            | `dict`                       | None             | XML tags in prompt                 | No                | XML-based structured output                   | XML is verbose and less common           |
+| **CommaSeparatedListOutputParser** | `list[str]`              | None             | Comma-separated list               | No                | Simple lists of items                         | Very limited use case                    |
+| **MarkdownListOutputParser**   | `list[str]`                  | None             | Markdown list format               | No                | Extracting bullet-point lists                 | Limited                                  |
+| **OutputFixingParser**         | Any (wrapper)                | Depends on inner | Wraps any parser                   | No                | Fixing malformed outputs from other parsers   | Adds extra LLM call                      |
 
-**Use case**: When you just want the raw response as a string (e.g., for display, summarization chains, or further manual processing).
+---
 
-```python
-from langchain_core.output_parsers import StrOutputParser
-
-parser = StrOutputParser()
-chain = llm | parser
-result = chain.invoke(prompt)  # Returns: str
