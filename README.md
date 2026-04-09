@@ -1,34 +1,24 @@
-#  LLM LangChain Playground
 
-A comprehensive collection of examples demonstrating how to use **LangChain with multiple LLM providers** including:
+# GenAI - LangChain Playground
 
-* OpenAI (GPT)
-* Anthropic (Claude)
-* Google Gemini
-* Hugging Face (API + Local Models)
-* Embeddings & Semantic Search
+A clean, well-structured collection of **LangChain** examples demonstrating how to work with multiple LLM providers, embeddings, prompts, and semantic search.
+
+**Supported Providers:**
+- OpenAI (GPT-4o, GPT-4o-mini, etc.)
+- Anthropic (Claude 3.5 Sonnet, Claude 3 Opus)
+- Google Gemini
+- Hugging Face (Inference API + Local models with `transformers`)
 
 ---
 
 ##  Features
 
-✔️ Multiple LLM integrations
-✔️ Embedding generation (OpenAI + HuggingFace)
-✔️ Document similarity using cosine similarity
-✔️ Local & API-based model support
-✔️ Clean and modular code structure
-
----
-
-##  Project Structure
-
-```
-models/        → LLM integrations
-embeddings/    → Embedding examples
-similarity/    → Semantic search
-demos/         → Simple demos
-docs/          → Guides
-```
+- Multiple LLM integrations with unified interface
+- Embedding generation & vector similarity search (cosine similarity)
+- Advanced prompt engineering (ChatPromptTemplate, few-shot, etc.)
+- Structured Output (Pydantic, JSON mode, etc.)
+- Local and API-based model support
+- Clean, modular, and well-commented code
 
 ---
 
@@ -51,7 +41,7 @@ venv\Scripts\activate   # Windows
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 
 ### 4. Setup environment variables
@@ -79,8 +69,6 @@ What is the capital of France?
 → Paris
 ```
 
----
-
 ##  Use Cases
 
 * Chatbots
@@ -88,5 +76,3 @@ What is the capital of France?
 * Semantic search
 * AI apps
 ---
-
-⭐ Star this repo if you found it helpful!
