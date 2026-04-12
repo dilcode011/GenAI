@@ -8,7 +8,7 @@ load_dotenv()
 
 #preprocessing
 def word_count(text):
-    return ;en(text.split())
+    return len(text.split())
 
 prompt = PromptTemplate(
     template='Write a joke about {topic}',
